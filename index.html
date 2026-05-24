@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Eagle Golf Saudi Arabia</title>
+<meta name="description" content="Eagle Golf Saudi Arabia — your trusted golf equipment partner in Saudi Arabia.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
+<style>
+:root{
+  --cream:#eef0e4; --cream2:#e2e8d4; --green-cream:#dce8c8; --green:#223629; --green2:#0f1d15; --sage:#707a6d; --line:rgba(34,54,41,.18); --white:#fff; --black:#050706;
+  --ease:cubic-bezier(.22,1,.36,1); --pad:clamp(18px,4vw,72px);
+}
+*{box-sizing:border-box} html{scroll-behavior:auto;background:var(--cream)} body{margin:0;font-family:Inter,Arial,sans-serif;color:var(--green);background:var(--cream);overflow-x:hidden;font-smoothing:antialiased;-webkit-font-smoothing:antialiased} a{color:inherit;text-decoration:none} img{display:block;max-width:100%} ::selection{background:rgba(87,120,59,.22)}
+.noise{position:fixed;inset:0;pointer-events:none;z-index:9999;opacity:.045;background-image:radial-gradient(#000 1px,transparent 1px);background-size:4px 4px;mix-blend-mode:multiply}
+.preloader{position:fixed;inset:0;z-index:1000;background:var(--green2);display:grid;place-items:center;color:#fff;overflow:hidden}
+.preloader:before{content:"";position:absolute;width:42vmin;height:42vmin;border:1px solid rgba(255,255,255,.16);border-radius:50%;box-shadow:0 0 80px rgba(187,219,154,.18)}
+.preloader img{width:min(280px,58vw);filter:brightness(0) invert(1);opacity:0;transform:scale(.9)}
+.preloader .sweep{position:absolute;width:35vw;height:1px;background:linear-gradient(90deg,transparent,#dce8c8,transparent);transform:rotate(-24deg) translateX(-80vw);opacity:.85}
+.nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:22px var(--pad);display:flex;justify-content:space-between;align-items:flex-start;pointer-events:none}
+.nav-logo{pointer-events:auto;display:flex;align-items:center;gap:14px;color:#fff;mix-blend-mode:difference}
+.nav-logo img{width:105px;height:auto;filter:brightness(0) invert(1)}
+.nav-actions{display:flex;gap:14px;align-items:center;pointer-events:auto}
+.pill{height:68px;padding:0 36px;border-radius:999px;background:rgba(255,255,255,.92);color:#0b100d;display:inline-flex;align-items:center;justify-content:center;font-weight:700;font-size:20px;box-shadow:0 18px 44px rgba(0,0,0,.08);backdrop-filter:blur(18px)}
+.menu-btn{width:68px;height:68px;border-radius:22px;border:0;background:rgba(255,255,255,.92);display:grid;place-items:center;cursor:pointer;box-shadow:0 18px 44px rgba(0,0,0,.08)}
+.menu-btn span,.menu-btn:before,.menu-btn:after{content:"";display:block;width:28px;height:2px;background:#0b100d;margin:4px 0;transition:.4s var(--ease)}
+.menu-open .menu-btn span{opacity:0}.menu-open .menu-btn:before{transform:translateY(6px) rotate(45deg)}.menu-open .menu-btn:after{transform:translateY(-6px) rotate(-45deg)}
+.menu-overlay{position:fixed;inset:0;z-index:90;background:var(--green-cream);clip-path:inset(0 0 100% 0);transition:clip-path .8s var(--ease);padding:110px var(--pad) 40px;display:grid;grid-template-columns:1fr 1.25fr;gap:48px;color:var(--green)}
+.menu-open .menu-overlay{clip-path:inset(0 0 0 0)}
+.menu-title{font-size:clamp(56px,9vw,130px);letter-spacing:-.07em;line-height:.9;font-weight:300;border-bottom:1px solid var(--line);padding-bottom:18px}
+.menu-links{display:grid;gap:18px;margin-top:42px;font-size:clamp(24px,3vw,48px);font-weight:300}
+.menu-links a{display:flex;align-items:center;gap:16px}.menu-links a:before{content:"";width:16px;height:16px;border:1px solid currentColor;display:inline-block}.menu-links a:hover:before{background:var(--green)}
+.menu-visuals{display:grid;grid-template-columns:1fr 1fr;gap:22px;align-content:center}.menu-card{height:290px;position:relative;overflow:hidden;border-radius:4px;color:white;padding:24px;display:flex;align-items:flex-end;font-size:24px;line-height:1.2}.menu-card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2}.menu-card:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.05),rgba(0,0,0,.64));z-index:-1}
+.hero{position:relative;min-height:100svh;background:#111;display:flex;align-items:flex-end;overflow:hidden;color:#fff;padding:130px var(--pad) 58px}
+.hero-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:scale(1.08)}
+.hero:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(2,8,4,.62),rgba(2,8,4,.18) 45%,rgba(2,8,4,.55)),linear-gradient(0deg,rgba(0,0,0,.58),rgba(0,0,0,.10));z-index:0}
+.hero-content{position:relative;z-index:1;width:100%;display:grid;grid-template-columns:.72fr 1.28fr;align-items:end;gap:28px}
+.eyebrow{font-size:clamp(12px,1.4vw,18px);letter-spacing:.16em;text-transform:uppercase;font-weight:800;color:#e6f0dc;margin-bottom:20px}
+.hero h1{margin:0;font-size:clamp(48px,9.6vw,164px);line-height:.82;letter-spacing:-.075em;font-weight:300;text-align:right;text-transform:uppercase}
+.hero h1 strong{font-weight:900;letter-spacing:-.08em}
+.hero-copy{max-width:560px;font-size:clamp(17px,2.05vw,32px);line-height:1.22;color:rgba(255,255,255,.88);font-weight:400}
+.section{padding:clamp(76px,10vw,150px) var(--pad);position:relative}
+.section-head{display:grid;grid-template-columns:.7fr 1.3fr;gap:40px;margin-bottom:48px;align-items:end}
+.kicker{text-transform:uppercase;letter-spacing:.14em;font-size:13px;font-weight:800;color:var(--sage)}
+.h2{font-size:clamp(38px,7vw,104px);line-height:.93;letter-spacing:-.06em;font-weight:300;margin:0}
+.h2 strong{font-weight:800}
+.lead{font-size:clamp(18px,2.4vw,34px);line-height:1.18;color:#586157;max-width:820px}
+.split-intro{background:var(--green-cream);display:grid;grid-template-columns:1fr 1fr;gap:0;min-height:88vh;padding:0}
+.split-text{padding:var(--pad);display:flex;flex-direction:column;justify-content:space-between}
+.split-text .h2{max-width:11ch}
+.split-media{position:relative;overflow:hidden;min-height:60vh}.split-media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:scale(1.1)}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line);border-left:1px solid var(--line)}
+.stat{min-height:260px;padding:34px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);display:flex;flex-direction:column;justify-content:space-between;background:rgba(255,255,255,.16)}
+.stat-num{font-size:clamp(44px,7vw,108px);letter-spacing:-.08em;font-weight:300;color:#748067}.stat p{margin:0;font-size:18px;line-height:1.35;color:#4f594f}
+.solution-grid{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--line);background:var(--cream2)}
+.solution-card{min-height:620px;position:relative;overflow:hidden;border-right:1px solid var(--line);padding:42px;display:flex;flex-direction:column;justify-content:space-between;color:#fff}
+.solution-card:last-child{border-right:0}.solution-card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;transform:scale(1.05);transition:.8s var(--ease)}.solution-card:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(15,29,21,.20),rgba(15,29,21,.72) 65%,rgba(15,29,21,.88));z-index:1}.solution-card>*{position:relative;z-index:2}.solution-card:hover img{transform:scale(1.13)}
+.solution-card h3{margin:0;font-size:clamp(23px,2vw,36px);line-height:1;letter-spacing:-.04em}.solution-num{font-size:clamp(70px,9vw,150px);font-weight:300;color:rgba(255,255,255,.55);letter-spacing:-.08em}.solution-card p{margin:0;font-size:22px;line-height:1.25;color:rgba(255,255,255,.9)}
+.expand-section{background:var(--green2);color:#fff;padding:120px var(--pad)}
+.scroll-expand-img{position:relative;width:100%;max-width:1320px;margin:44px auto;aspect-ratio:16/9;border-radius:34px;overflow:hidden;transform:scale(.86) translateY(70px);opacity:.25;will-change:transform,opacity,border-radius}
+.scroll-expand-img img{width:100%;height:100%;object-fit:cover;transform:scale(1.16);will-change:transform}.caption{position:absolute;left:26px;right:26px;bottom:24px;z-index:2;color:#fff;display:flex;justify-content:space-between;gap:20px;font-size:clamp(18px,2vw,30px);font-weight:600;text-shadow:0 4px 30px rgba(0,0,0,.55)}.scroll-expand-img:after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(0,0,0,.52),transparent 56%)}
+.process{background:#050806;color:#fff;display:grid;grid-template-columns:.78fr 1.22fr;gap:48px;min-height:95vh}
+.process-list{display:grid;gap:18px;color:rgba(255,255,255,.58);font-size:26px;margin-top:70px}.process-list span:first-child{color:#dce8c8}.process-steps{border-left:1px solid rgba(255,255,255,.3);border-right:1px solid rgba(255,255,255,.3)}.step{padding:42px;border-bottom:1px solid rgba(255,255,255,.26)}.step small{color:#bdd3a1;font-weight:800;font-size:24px}.step h3{font-size:clamp(34px,4.6vw,76px);letter-spacing:-.06em;line-height:.95;margin:18px 0;font-weight:500}.step p{font-size:24px;line-height:1.35;color:rgba(255,255,255,.78);max-width:720px}
+.gallery{display:grid;grid-template-columns:1.2fr .8fr 1fr;grid-auto-rows:320px;gap:20px}.gallery img{width:100%;height:100%;object-fit:cover;border-radius:24px}.gallery img:nth-child(1){grid-row:span 2}.gallery img:nth-child(4){grid-column:span 2}
+.cta{min-height:86vh;display:grid;place-items:center;text-align:center;color:#fff;overflow:hidden;background:#000;position:relative;padding:80px var(--pad)}.cta img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.56;transform:scale(1.08)}.cta:after{content:"";position:absolute;inset:0;background:rgba(4,9,5,.48)}.cta .inner{position:relative;z-index:1}.cta h2{font-size:clamp(46px,10vw,150px);letter-spacing:-.08em;line-height:.86;margin:0 0 34px;text-transform:uppercase}.footer{background:var(--green);color:#eef7e9;padding:54px var(--pad);display:grid;grid-template-columns:1fr 1fr;gap:30px}.footer img{width:140px;filter:brightness(0) invert(1);margin-bottom:22px}.footer p,.footer a{color:rgba(255,255,255,.8);font-size:18px;line-height:1.5}
+.reveal{opacity:0;transform:translateY(32px)}
+@media(max-width:980px){
+ .nav{padding:16px 18px;align-items:center}.nav-logo img{width:82px}.pill{height:52px;padding:0 18px;font-size:15px}.menu-btn{width:52px;height:52px;border-radius:16px}.menu-btn span,.menu-btn:before,.menu-btn:after{width:22px}
+ .hero{padding:120px 18px 38px;min-height:96svh}.hero-content{grid-template-columns:1fr;gap:22px}.hero h1{text-align:left;font-size:clamp(42px,15vw,74px);line-height:.88;letter-spacing:-.065em}.hero-copy{font-size:18px;max-width:92%}.eyebrow{font-size:11px;margin-bottom:14px}
+ .section{padding:70px 18px}.section-head{grid-template-columns:1fr;gap:18px;margin-bottom:32px}.h2{font-size:clamp(38px,12vw,58px)}.lead{font-size:19px;line-height:1.28}
+ .split-intro{grid-template-columns:1fr}.split-text{min-height:54vh;padding:70px 18px}.split-media{min-height:54vh}
+ .stats{grid-template-columns:1fr 1fr}.stat{min-height:190px;padding:22px}.stat-num{font-size:52px}.stat p{font-size:14px}
+ .solution-grid{grid-template-columns:1fr}.solution-card{min-height:430px;padding:28px;border-right:0;border-bottom:1px solid var(--line)}.solution-card p{font-size:18px}.solution-num{font-size:82px}
+ .expand-section{padding:72px 18px}.scroll-expand-img{border-radius:22px;aspect-ratio:4/5;margin:26px auto}.caption{font-size:18px;display:block;bottom:18px;left:18px;right:18px}
+ .process{grid-template-columns:1fr;padding:72px 18px;gap:24px}.process-list{font-size:18px;margin-top:30px}.process-steps{border-left:0;border-right:0}.step{padding:28px 0}.step small{font-size:17px}.step h3{font-size:36px}.step p{font-size:18px}
+ .gallery{grid-template-columns:1fr;grid-auto-rows:280px;gap:14px}.gallery img:nth-child(1),.gallery img:nth-child(4){grid-row:auto;grid-column:auto}
+ .menu-overlay{grid-template-columns:1fr;padding:92px 18px 30px;overflow:auto}.menu-visuals{grid-template-columns:1fr}.menu-card{height:220px}.menu-title{font-size:56px}
+ .footer{grid-template-columns:1fr;padding:44px 18px}.footer img{width:110px}.cta h2{font-size:48px}
+}
+@media(max-width:420px){.hero h1{font-size:44px}.pill{display:none}.nav-logo img{width:76px}.stats{grid-template-columns:1fr}.stat{min-height:150px}}
+</style>
+
+<style>
+/* === Compact typography and icons pass === */
+:root{--pad:clamp(16px,3.2vw,54px)}
+.nav{padding:16px var(--pad)}
+.nav-logo img{width:84px}
+.pill{height:52px;padding:0 24px;font-size:15px}
+.menu-btn{width:52px;height:52px;border-radius:17px}
+.menu-btn span,.menu-btn:before,.menu-btn:after{width:22px;height:1.7px;margin:3.5px 0}
+.preloader img{width:min(210px,46vw)}
+.menu-title{font-size:clamp(42px,7vw,92px)}
+.menu-links{font-size:clamp(20px,2.35vw,34px);gap:14px}.menu-links a:before{width:12px;height:12px}.menu-card{height:230px;font-size:18px;padding:20px}
+.hero{padding:112px var(--pad) 46px}.eyebrow{font-size:clamp(10px,1vw,13px);margin-bottom:14px}.hero h1{font-size:clamp(42px,7.8vw,124px);line-height:.86;letter-spacing:-.065em}.hero-copy{font-size:clamp(15px,1.55vw,23px);max-width:490px;line-height:1.3}
+.section{padding:clamp(62px,8vw,110px) var(--pad)}.section-head{margin-bottom:36px}.kicker{font-size:11px}.h2{font-size:clamp(32px,5.5vw,78px);letter-spacing:-.052em}.lead{font-size:clamp(16px,1.9vw,25px);line-height:1.25}
+.stat{min-height:210px;padding:26px}.stat-num{font-size:clamp(36px,5.3vw,76px)}.stat p{font-size:15px}.solution-card{min-height:500px;padding:32px}.solution-card h3{font-size:clamp(20px,1.65vw,28px)}.solution-card p{font-size:17px}.solution-num{font-size:clamp(52px,7vw,108px)}
+.expand-section{padding:88px var(--pad)}.scroll-expand-img{max-width:1180px;border-radius:26px;margin:34px auto}.caption{font-size:clamp(15px,1.55vw,22px)}
+.process{gap:36px}.process-list{font-size:20px;margin-top:46px}.step{padding:32px}.step small{font-size:18px}.step h3{font-size:clamp(28px,3.8vw,56px)}.step p{font-size:18px}.gallery{grid-auto-rows:270px}.cta h2{font-size:clamp(38px,8vw,108px)}.footer img{width:112px}.footer p,.footer a{font-size:15px}
+@media(max-width:980px){
+  :root{--pad:16px}.nav{padding:12px 14px}.nav-logo img{width:64px}.pill{height:42px;padding:0 14px;font-size:12px}.menu-btn{width:42px;height:42px;border-radius:13px}.menu-btn span,.menu-btn:before,.menu-btn:after{width:18px;height:1.5px;margin:3px 0}
+  .hero{padding:92px 16px 30px;min-height:88svh}.hero h1{font-size:clamp(34px,11.5vw,54px);line-height:.92;letter-spacing:-.052em}.hero-copy{font-size:15px;line-height:1.36;max-width:100%}.eyebrow{font-size:10px;margin-bottom:10px;letter-spacing:.13em}
+  .section{padding:54px 16px}.section-head{gap:12px;margin-bottom:24px}.h2{font-size:clamp(30px,9.5vw,44px);line-height:.98}.lead{font-size:16px;line-height:1.35}.kicker{font-size:10px}
+  .split-text{min-height:auto;padding:54px 16px;gap:38px}.split-media{min-height:42vh}.stats{grid-template-columns:1fr 1fr}.stat{min-height:136px;padding:16px}.stat-num{font-size:36px}.stat p{font-size:12.5px;line-height:1.35}
+  .solution-card{min-height:330px;padding:22px}.solution-card h3{font-size:21px}.solution-card p{font-size:14.5px;line-height:1.35}.solution-num{font-size:56px}
+  .expand-section{padding:54px 16px}.scroll-expand-img{border-radius:18px;margin:20px auto}.caption{font-size:14px;bottom:14px;left:14px;right:14px}.process{padding:54px 16px}.process-list{font-size:15px;margin-top:20px}.step{padding:22px 0}.step small{font-size:13px}.step h3{font-size:28px}.step p{font-size:14.5px;line-height:1.42}.gallery{grid-auto-rows:210px}.menu-overlay{padding:78px 16px 26px}.menu-title{font-size:40px}.menu-links{font-size:22px}.menu-card{height:180px;font-size:15px}.cta{padding:58px 16px}.cta h2{font-size:36px}.footer{padding:34px 16px}.footer img{width:84px}.footer p,.footer a{font-size:13px}
+}
+@media(max-width:420px){.hero h1{font-size:36px}.nav-logo img{width:58px}.stats{grid-template-columns:1fr}.stat{min-height:118px}.solution-card{min-height:300px}.gallery{grid-auto-rows:190px}.menu-btn{width:40px;height:40px}}
+
+</style>
+</head>
+<body>
+<div class="noise"></div>
+<div class="preloader" id="preloader"><span class="sweep"></span><img src="assets/logo2.png" alt="Eagle Golf"></div>
+<nav class="nav">
+  <a class="nav-logo" href="#top"><img src="assets/logo2.png" alt="Eagle Golf"></a>
+  <div class="nav-actions"><a class="pill" href="mailto:eaglegolf.saudi@gmail.com">Contact Eagle Golf</a><button class="menu-btn" aria-label="Menu"><span></span></button></div>
+</nav>
+<div class="menu-overlay">
+ <div><div class="menu-title">Discover</div><div class="menu-links"><a href="#top">Home</a><a href="#about">About</a><a href="#solutions">Solutions</a><a href="#process">Process</a><a href="#contact">Contact</a></div></div>
+ <div class="menu-visuals"><div class="menu-card"><img src="assets/034aea8d-8f4a-4cfb-b1ba-0a70c43c378a.jpg"><span>Premium distribution strategy for Saudi golf.</span></div><div class="menu-card"><img src="assets/80ab184d-4b6b-4d49-927c-bec57ed50885.jpg"><span>Retail, e-commerce, and partnership execution.</span></div></div>
+</div>
+<header class="hero" id="top">
+ <img class="hero-bg" src="assets/98424641-c860-4e92-8e88-7d850b03dcc1.jpg" alt="Golf course">
+ <div class="hero-content">
+   <div><div class="eyebrow">Your trusted golf equipment partner</div><p class="hero-copy">Eagle Golf connects premium golf brands with Saudi Arabia through disciplined distribution, retail partnerships, and localized e-commerce execution.</p></div>
+   <h1><span>Your Trusted</span><br><strong>Golf Equipment</strong><br><span>Partner in</span> <strong>Saudi Arabia</strong></h1>
+ </div>
+</header>
+<section class="split-intro" id="about">
+ <div class="split-text"><div><div class="kicker">About Eagle Golf</div><h2 class="h2 reveal">A focused partner for Saudi golf growth.</h2></div><p class="lead reveal">We support premium golf brands entering Saudi Arabia with market positioning, brand launch planning, retail placement, and operational follow-through.</p></div>
+ <div class="split-media"><img data-parallax src="assets/034aea8d-8f4a-4cfb-b1ba-0a70c43c378a.jpg" alt="Golf equipment warehouse"></div>
+</section>
+<section class="section">
+ <div class="section-head"><div class="kicker">Market Signals</div><h2 class="h2 reveal">Saudi golf is moving from niche demand to structured commercial opportunity.</h2></div>
+ <div class="stats">
+  <div class="stat"><div class="stat-num counter" data-text="$117.2M">$117.2M</div><p>Market opportunity</p></div><div class="stat"><div class="stat-num counter" data-text="$37K">$37K</div><p>Premium consumer potential</p></div><div class="stat"><div class="stat-num counter" data-text="50K+">50K+</div><p>Golf audience and participation growth</p></div><div class="stat"><div class="stat-num counter" data-text="25+">25+</div><p>Potential partnership channels</p></div>
+ </div>
+</section>
+<section class="section" id="solutions">
+ <div class="section-head"><div class="kicker">What We Deliver</div><h2 class="h2 reveal">Distribution, retail, resort access, and digital growth.</h2></div>
+ <div class="solution-grid">
+  <article class="solution-card"><img src="assets/e3f11d75-fd16-4458-9ed9-a142cfd78b8d.jpg"><h3>Premium Brands</h3><div class="solution-num">01</div><p>Localized positioning, launch planning, and premium retail placement.</p></article>
+  <article class="solution-card"><img src="assets/43fb8d49-8041-4139-9524-9d915f76a732.jpg"><h3>Retail Partners</h3><div class="solution-num">02</div><p>Merchandising, inventory planning, and sell-through support.</p></article>
+  <article class="solution-card"><img src="assets/2ee13757-8de0-4fed-a314-a871fdd40016.jpg"><h3>Courses & Resorts</h3><div class="solution-num">03</div><p>Product integration for clubs, academies, resorts, and hospitality destinations.</p></article>
+  <article class="solution-card"><img src="assets/0513ffe7-4436-4e1a-a952-325ce0d96800.jpg"><h3>E-Commerce Growth</h3><div class="solution-num">04</div><p>Localized digital storefronts, campaigns, and fulfillment operations.</p></article>
+ </div>
+</section>
+<section class="expand-section">
+ <div class="section-head"><div class="kicker">Visual Strategy</div><h2 class="h2 reveal">A premium golf presence built through visibility and execution.</h2></div>
+ <div class="scroll-expand-img"><img src="assets/80ab184d-4b6b-4d49-927c-bec57ed50885.jpg" alt="Golf ball"><div class="caption"><span>Launch Readiness</span><span>Saudi Arabia</span></div></div>
+ <div class="scroll-expand-img"><img src="assets/0f2c8a02-8c35-426d-b281-307c930bf932.jpg" alt="Golf ball"><div class="caption"><span>Retail & Fulfillment</span><span>Eagle Golf</span></div></div>
+</section>
+<section class="section process" id="process">
+ <div><div class="kicker">Our Process</div><h2 class="h2 reveal">Structured execution for long-term market success.</h2><div class="process-list"><span>▸ Market Entry Strategy</span><span>Distribution Setup</span><span>Retail Activation</span><span>E-Commerce Growth</span></div></div>
+ <div class="process-steps"><div class="step"><small>Step 1</small><h3>Market Positioning</h3><p>We define brand fit, audience, pricing, and local launch priorities for Saudi Arabia.</p></div><div class="step"><small>Step 2</small><h3>Distribution Setup</h3><p>We organize channel planning, product availability, inventory flow, and retail readiness.</p></div><div class="step"><small>Step 3</small><h3>Commercial Growth</h3><p>We support retail campaigns, digital storefronts, partnerships, and performance follow-up.</p></div></div>
+</section>
+<section class="section">
+ <div class="section-head"><div class="kicker">Gallery</div><h2 class="h2 reveal">Built around the visual language of premium golf.</h2></div>
+ <div class="gallery"><img src="assets/e3f11d75-fd16-4458-9ed9-a142cfd78b8d.jpg"><img src="assets/43fb8d49-8041-4139-9524-9d915f76a732.jpg"><img src="assets/2ee13757-8de0-4fed-a314-a871fdd40016.jpg"><img src="assets/0513ffe7-4436-4e1a-a952-325ce0d96800.jpg"><img src="assets/0f2c8a02-8c35-426d-b281-307c930bf932.jpg"></div>
+</section>
+<section class="cta" id="contact"><img src="assets/98424641-c860-4e92-8e88-7d850b03dcc1.jpg" alt="Golf course"><div class="inner"><h2>Build Your Golf Presence in Saudi Arabia</h2><a class="pill" href="mailto:eaglegolf.saudi@gmail.com">eaglegolf.saudi@gmail.com</a></div></section>
+<footer class="footer"><div><img src="assets/logo2.png" alt="Eagle Golf"><p>Eagle Golf Saudi Arabia</p><p>Saudi Arabia</p></div><div><p><strong>Contact</strong></p><p><a href="mailto:eaglegolf.saudi@gmail.com">eaglegolf.saudi@gmail.com</a></p><p><a href="tel:+966534873343">+966534873343</a></p></div></footer>
+<script>
+window.addEventListener('load',()=>{
+  const pre=document.getElementById('preloader');
+  const tl=gsap.timeline({defaults:{ease:'power3.out'}});
+  tl.to('.preloader img',{opacity:1,scale:1,duration:.7}).to('.preloader .sweep',{x:'160vw',duration:.8,ease:'power2.inOut'},'-=.25').to('.preloader img',{scale:.96,opacity:0,duration:.35,delay:.35}).to(pre,{clipPath:'inset(0 0 100% 0)',duration:.8,ease:'expo.inOut'},'-=.1').set(pre,{display:'none'}).from('.nav-logo,.nav-actions',{y:-24,opacity:0,duration:.55,stagger:.08},'-=.35').from('.hero h1,.hero-copy,.eyebrow',{y:70,opacity:0,duration:.9,stagger:.08},'-=.4');
+});
+try{const lenis=new Lenis({duration:1.1,easing:t=>Math.min(1,1.001-Math.pow(2,-10*t))});function raf(t){lenis.raf(t);requestAnimationFrame(raf)}requestAnimationFrame(raf);}catch(e){}
+gsap.registerPlugin(ScrollTrigger);
+gsap.utils.toArray('.reveal').forEach(el=>gsap.to(el,{scrollTrigger:{trigger:el,start:'top 86%'},opacity:1,y:0,duration:.9,ease:'power3.out'}));
+gsap.utils.toArray('[data-parallax]').forEach(img=>gsap.to(img,{yPercent:10,ease:'none',scrollTrigger:{trigger:img.parentElement,start:'top bottom',end:'bottom top',scrub:true}}));
+gsap.utils.toArray('.scroll-expand-img').forEach(box=>{gsap.to(box,{scale:1,opacity:1,y:0,borderRadius:'22px',scrollTrigger:{trigger:box,start:'top 88%',end:'top 35%',scrub:1.1}});gsap.to(box.querySelector('img'),{scale:1.02,scrollTrigger:{trigger:box,start:'top bottom',end:'bottom top',scrub:true}})});
+gsap.utils.toArray('.solution-card,.stat,.gallery img,.step').forEach(el=>gsap.from(el,{scrollTrigger:{trigger:el,start:'top 92%'},y:30,opacity:0,duration:.7,ease:'power2.out'}));
+document.querySelector('.menu-btn').addEventListener('click',()=>document.body.classList.toggle('menu-open'));
+document.querySelectorAll('.menu-overlay a').forEach(a=>a.addEventListener('click',()=>document.body.classList.remove('menu-open')));
+</script>
+</body></html>
